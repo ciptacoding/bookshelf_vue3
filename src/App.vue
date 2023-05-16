@@ -39,13 +39,16 @@
 					<tbody>
 						<tr v-for="(book, index) in books" :key="index" class="bg-white border-b">
 							<td class="px-6 py-3">{{ index+1 }}</td>
-							<td class="px-6 py-3">{{ book.title }}</td>
+							<td class="px-6 py-3" v-if="book.isDone">
+								<del>{{ book.title }}</del>
+							</td>
+							<td class="px-6 py-3" v-else>{{book.title}}</td>
 							<td class="px-6 py-3">{{ book.author }}</td>
 							<td class="px-6 py-3">{{ book.year }}</td>
 							<td class="px-6 py-3 flex items-center gap-2">
-								<button ><Icon icon="material-symbols:delete-outline" height="18" /></button>
-								<button ><Icon icon="mdi:clipboard-edit-outline" height="18" /></button>
-								<button ><Icon icon="octicon:checklist-24" height="18" /></button>
+								<button :title="DeleteTitle" @click="deleteBook(index)" ><Icon icon="material-symbols:delete-outline" height="18" /></button>
+								<button :title="UpdateTitle"><Icon icon="mdi:clipboard-edit-outline" height="18" /></button>
+								<button :title="DoneTitle" @click="doneRead(index)"><Icon icon="octicon:checklist-24" height="18" /></button>
 							</td>
 						</tr>
 					</tbody>
@@ -60,25 +63,29 @@
 	export default{
 		components: {Icon},
 
-		mounted(){
-			this.books = JSON.parse(localStorage.getItem('books')); //get data books from local storage
-		}, 
-
 		data(){
 			return{
+				// title
+				DeleteTitle: 'Delete Book',
+				UpdateTitle: 'Update Book',
+				DoneTitle: 'Is Done',
+
+				// v-model
 				title: '',
 				author: '',
 				year: '',
+				// books storage
 				books: []
 			}
 		},
 
 		methods: {
 			add(){
-				this.books.push({
+				this.books.unshift({
 					title: this.title,
 					author: this.author,
 					year: this.year,
+					isDone: false,
 				});
 				this.title = ''
 				this.author = ''
@@ -86,9 +93,38 @@
 				this.saveToLocalStorage();
 			},
 
+			deleteBook(bookIndex){
+				this.books = this.books.filter((item, index) => {
+					if(index != bookIndex){
+						return item;
+					}
+				});
+				this.saveToLocalStorage();
+			},
+
+			doneRead(bookIndex){
+				this.books = this.books.filter((item, index) => {
+					if(index == bookIndex){
+						item.isDone = !item.isDone
+					}
+					return item;
+				});
+				this.saveToLocalStorage();
+			},
+
 			saveToLocalStorage(){
 				localStorage.setItem('books', JSON.stringify(this.books))
 			},
 		},
+
+		mounted(){
+			try {
+				const storedBooks = localStorage.getItem('books');
+				this.books = storedBooks ? JSON.parse(storedBooks) : [];
+			} catch (error) {
+				console.error('Error retrieving data from local storage:', error);
+    			this.books = [];
+			}
+		}, 
 	};
 </script>
