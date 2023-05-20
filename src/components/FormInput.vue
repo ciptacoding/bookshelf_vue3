@@ -1,5 +1,8 @@
 <template>
 	<div>
+		<header class="mb-4">
+				<h1 class="font-bold text-2xl text-center">Bookshelf Vue 3</h1>
+		</header>
 	  <div class="mb-4">
 		 <label for="addTitle" class="block mb-1">Title</label>
 		 <input @input="$emit('update:input-title', $event.target.value)" :value="inputTitle" type="text" 

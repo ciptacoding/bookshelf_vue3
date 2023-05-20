@@ -1,9 +1,6 @@
 <template>
 	<div class="mt-8 p-4 md:px-28 lg:px-60 xl:px-72">
 		<section class="bg-white shadow-md rounded-md p-4 lg:px-28">
-			<header class="mb-4">
-				<h1 class="font-bold text-2xl text-center">Bookshelf Vue 3</h1>
-			</header>
 			<FormInput v-model:input-title="title" v-model:input-author="author" v-model:input-year="year" @submit-form="add"/>
 		</section>
 
