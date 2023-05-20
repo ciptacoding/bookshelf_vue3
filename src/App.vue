@@ -4,21 +4,7 @@
 			<header class="mb-4">
 				<h1 class="font-bold text-2xl text-center">Bookshelf Vue 3</h1>
 			</header>
-			<div class="mb-4">
-				<label for="addBook" class="block mb-1">Title</label>
-				<input type="text" id="addBook" v-model="title" class="rounded-md border-black w-full bg-gray-100 border border-solid py-1 px-2 focus:outline-cyan-500" placeholder="Input title">
-			</div>
-			<div class="mb-4">
-				<label for="addBook" class="block mb-1">Author</label>
-				<input type="text" id="addBook" v-model="author" class="rounded-md border-black w-full bg-gray-100 border border-solid py-1 px-2 focus:outline-cyan-500" placeholder="Input author">
-			</div>
-			<div class="mb-8">
-				<label for="addBook" class="block mb-1">Year</label>
-				<input type="text" id="addBook" v-model="year" class="rounded-md border-black w-full bg-gray-100 border border-solid py-1 px-2 focus:outline-cyan-500" placeholder="Input year">
-			</div>
-			<div class="flex justify-end">
-				<button @click="add"  class="bg-blue-500 px-8 py-1 text-white rounded-md shadow-md mb-4">Add Book</button>
-			</div>
+			<FormInput v-model:input-title="title" v-model:input-author="author" v-model:input-year="year" @submit-form="add"/>
 		</section>
 
 		<section class="bg-white shadow-md rounded-md p-4 mt-8">
@@ -60,9 +46,9 @@
 
 <script>
 	import { Icon } from '@iconify/vue';
+	import FormInput from './components/FormInput.vue';
 	export default{
-		components: {Icon},
-
+		components: {Icon, FormInput},
 		data(){
 			return{
 				// title
@@ -74,6 +60,7 @@
 				title: '',
 				author: '',
 				year: '',
+
 				// books storage
 				books: []
 			}
