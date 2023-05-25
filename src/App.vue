@@ -5,7 +5,7 @@
 		</section>
 
 		<section class="bg-white shadow-md rounded-md p-4 mt-8">
-			<ListBooks :books="books" @delete-book="deleteBook" @done-read="doneRead"/>
+			<ListBooks :books="books" @delete-book="deleteBook" @update-book="updateBook" @done-read="doneRead"/>
 		</section>
 	</div>
 </template>
@@ -48,6 +48,10 @@
 					}
 				});
 				this.saveToLocalStorage();
+			},
+
+			updateBook(bookIndex){
+
 			},
 
 			doneRead(bookIndex){

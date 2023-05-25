@@ -5,7 +5,7 @@
 			inputAuthor: String,
 			inputYear: String,
 		},
-		emits: ['update:input-title', 'update:input-author', 'update:input-year'],
+		emits: ['input-title', 'input-author', 'input-year'],
 		methods: {
 			add() {
 				this.$emit('submit-form');
