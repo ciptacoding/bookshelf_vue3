@@ -24,9 +24,10 @@
 						<td class="px-6 py-3">{{ book.author }}</td>
 						<td class="px-6 py-3">{{ book.year }}</td>
 						<td class="px-6 py-3 flex items-center gap-2">
-							<button :title="DeleteTitle" @click="deleteBook(index)"><Icon icon="material-symbols:delete-outline" height="18" /></button>
-							<button :title="UpdateTitle" @click="updateBook(index)"><Icon icon="mdi:clipboard-edit-outline" height="18" /></button>
 							<button :title="DoneTitle" @click="doneRead(index)"><Icon icon="octicon:checklist-24" height="18" /></button>
+							<button :title="DeleteTitle" @click="deleteBook(index)">
+								<Icon icon="material-symbols:delete-outline" height="18" />
+							</button>
 						</td>
 					</tr>
 				</tbody>
@@ -44,7 +45,6 @@
 			return {
 				// title
 				DeleteTitle: 'Delete Book',
-				UpdateTitle: 'Update Book',
 				DoneTitle: 'Is Done',
 			}
 		},

@@ -50,10 +50,6 @@
 				this.saveToLocalStorage();
 			},
 
-			updateBook(bookIndex){
-
-			},
-
 			doneRead(bookIndex){
 				this.books = this.books.filter((item, index) => {
 					if(index == bookIndex){
